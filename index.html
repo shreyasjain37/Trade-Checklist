@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trade Checklist</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo-block">
+        <span class="logo-mark">◈</span>
+        <div>
+          <div class="site-title">TRADE CHECKLIST</div>
+          <div class="site-sub">Pre-Trade Verification System</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn-ghost" onclick="resetAll()">Reset All</button>
+        <button class="btn-primary" onclick="printChecklist()">Export</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Module Tabs -->
+    <nav class="module-tabs">
+      <button class="tab active" data-module="0" onclick="switchModule(0)">
+        <span class="tab-num">M1</span>
+        <span class="tab-label">Supply & Demand</span>
+      </button>
+      <button class="tab" data-module="1" onclick="switchModule(1)">
+        <span class="tab-num">M2</span>
+        <span class="tab-label">Asia Range & London Sweep</span>
+      </button>
+      <button class="tab" data-module="2" onclick="switchModule(2)">
+        <span class="tab-num">M3A</span>
+        <span class="tab-label">DR Break & Retest</span>
+      </button>
+      <button class="tab" data-module="3" onclick="switchModule(3)">
+        <span class="tab-num">M3B</span>
+        <span class="tab-label">DR Rejection</span>
+      </button>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-wrap">
+      <div class="progress-meta">
+        <span id="progress-label">0 of 9 checks complete</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Checklist Panels -->
+    <div class="checklist-panels">
+
+      <!-- Module 1: Supply and Demand -->
+      <div class="panel active" id="panel-0">
+        <div class="panel-header">
+          <div class="panel-title">Supply and Demand</div>
+          <div class="panel-desc">Confirm all steps before executing a trade based on supply/demand zones.</div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">BIAS</div>
+          <div class="check-item" data-id="m1-1">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">HTF Bias — 4H / 1H Swing Structure</div>
+              <div class="check-detail">Identify swing highs/lows on 4H and 1H. <span class="tag tag-buy">Discount → Buy</span> <span class="tag tag-sell">Premium → Sell</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">ZONE IDENTIFICATION</div>
+          <div class="check-item" data-id="m1-2">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Mark All 4 Zone Types</div>
+              <div class="check-detail">
+                <span class="tag tag-green">RBR</span>
+                <span class="tag tag-red">DBD</span>
+                <span class="tag tag-reverse">RBD</span>
+                <span class="tag tag-reverse">DBR</span>
+              </div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m1-3">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Zone Location Confirms Bias</div>
+              <div class="check-detail"><span class="tag tag-sell">Premium zone → Sell</span> <span class="tag tag-buy">Discount zone → Buy</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">SESSION FILTER</div>
+          <div class="check-item" data-id="m1-4">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Inside a Valid Kill Zone</div>
+              <div class="check-detail"><span class="tag tag-session">London KZ</span> <span class="tag tag-session">New York KZ</span> — Do not trade outside these windows.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">ENTRY PREPARATION</div>
+          <div class="check-item" data-id="m1-5">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">LTF Discount Zone Identified for Entry</div>
+              <div class="check-detail">Drop to LTF and confirm a discount zone is present for potential entry.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m1-6">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Liquidity Present & Mapped</div>
+              <div class="check-detail">Confirm resting liquidity (equal highs/lows, stop clusters) is accounted for.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">EXECUTION</div>
+          <div class="check-item" data-id="m1-7">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Entry Placed at Zone</div>
+              <div class="check-detail">Entry is at the identified supply or demand zone — not chasing price.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m1-8">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Stop Loss Above / Below Zone</div>
+              <div class="check-detail">Stop is beyond the zone boundary to invalidate the setup cleanly.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m1-9">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Target Confirmed</div>
+              <div class="check-detail">Minimum <span class="tag tag-rr">1:2 RR</span> — or opposing liquidity / HTF discount zone.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 2: Asia Range & London Sweep -->
+      <div class="panel" id="panel-1">
+        <div class="panel-header">
+          <div class="panel-title">Asia Range & London Sweep</div>
+          <div class="panel-desc">Confirm Asia session range and London's sweep of its liquidity before entry.</div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">BIAS</div>
+          <div class="check-item" data-id="m2-1">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">HTF Bias — 4H / 1H Swing Structure</div>
+              <div class="check-detail">Identify swing highs/lows on 4H and 1H. <span class="tag tag-buy">Discount → Buy</span> <span class="tag tag-sell">Premium → Sell</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">SESSION ANALYSIS</div>
+          <div class="check-item" data-id="m2-2">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Asia Session Range Marked</div>
+              <div class="check-detail">Mark the high and low of the Asia session clearly on your chart.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m2-3">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">London Has Swept Asia Liquidity</div>
+              <div class="check-detail">Confirm London session took out the Asia high or low (liquidity sweep confirmed).</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">CONFIRMATION</div>
+          <div class="check-item" data-id="m2-4">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">5-Min CHoCH Formed</div>
+              <div class="check-detail">Wait for a Change of Character on the 5-minute chart after the sweep.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m2-5">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">LTF Discount Zone for Entry</div>
+              <div class="check-detail">Drop to LTF and confirm a discount zone aligns with the CHoCH direction.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">EXECUTION</div>
+          <div class="check-item" data-id="m2-6">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Entry Placed at Zone</div>
+              <div class="check-detail">Entry is at the identified LTF zone — not chasing price.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m2-7">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Stop Loss Above / Below the Zone</div>
+              <div class="check-detail">Stop is placed beyond the zone to invalidate the setup.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m2-8">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Target: Asia High or Low</div>
+              <div class="check-detail">Target is the opposing Asia session level — Asia High (for buys) or Asia Low (for sells).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 3A: DR Break and Retest -->
+      <div class="panel" id="panel-2">
+        <div class="panel-header">
+          <div class="panel-title">DR Break and Retest</div>
+          <div class="panel-desc">Wait for the Defining Range to form, break, and retest before entry.</div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">RANGE SETUP</div>
+          <div class="check-item" data-id="m3a-1">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Wait for the DR to Form</div>
+              <div class="check-detail">Do not act until the Defining Range has fully established its boundaries.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m3a-2">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Mark All Internal Zones</div>
+              <div class="check-detail">Map Supply/Demand zones, FVGs within the range structure.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m3a-3">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">DR High / Low / Mid Identified</div>
+              <div class="check-detail">All three key DR levels are clearly marked on the chart.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">BREAK & RETEST</div>
+          <div class="check-item" data-id="m3a-4">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Zone Break Confirmed</div>
+              <div class="check-detail">Price has broken through the identified zone — wait for the break, not the approach.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m3a-5">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Retest Has Occurred — Entry Planned</div>
+              <div class="check-detail">Price returns to the broken zone. Entry is planned at the retest, not the break.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">EXECUTION</div>
+          <div class="check-item" data-id="m3a-6">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Stop Loss Above / Below Zone</div>
+              <div class="check-detail">Stop is beyond the retested zone to invalidate the setup.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m3a-7">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Target Confirmed</div>
+              <div class="check-detail">Minimum <span class="tag tag-rr">1:2 RR</span> — or opposing liquidity / HTF discount zone.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 3B: DR Rejection -->
+      <div class="panel" id="panel-3">
+        <div class="panel-header">
+          <div class="panel-title">DR Rejection Confirmation</div>
+          <div class="panel-desc">When direction is uncertain, wait for two consecutive rejection candles and enter on the third.</div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">RANGE SETUP</div>
+          <div class="check-item" data-id="m3b-1">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Wait for the DR to Form</div>
+              <div class="check-detail">Do not act until the Defining Range has fully established its boundaries.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m3b-2">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Mark All Internal Zones</div>
+              <div class="check-detail">Map Supply/Demand zones, FVGs within the range structure.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m3b-3">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">DR High / Low / Mid Identified</div>
+              <div class="check-detail">All three key DR levels are clearly marked on the chart.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">BREAK OBSERVED</div>
+          <div class="check-item" data-id="m3b-4">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Zone Break Confirmed (Direction Uncertain)</div>
+              <div class="check-detail">Price broke through a zone but direction is ambiguous — do not enter yet.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">REJECTION PATTERN</div>
+          <div class="check-item" data-id="m3b-5">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Price Pulled Back into DR Levels</div>
+              <div class="check-detail">Price returned to the range after the break — now watching for rejection signal.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m3b-6">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Two Consecutive Rejection Candles Formed</div>
+              <div class="check-detail">Two back-to-back candles rejecting the DR level are confirmed. Wait for candle 2 to close.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-group">
+          <div class="section-label">EXECUTION</div>
+          <div class="check-item" data-id="m3b-7">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Entry on 3rd Candle</div>
+              <div class="check-detail">Enter at the open or confirmed move of the third candle — not before.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m3b-8">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Stop Loss Above / Below Zone</div>
+              <div class="check-detail">Stop placed beyond the rejection zone to invalidate the pattern.</div>
+            </div>
+          </div>
+          <div class="check-item" data-id="m3b-9">
+            <div class="check-box" onclick="toggleCheck(this)"></div>
+            <div class="check-content">
+              <div class="check-title">Target Confirmed</div>
+              <div class="check-detail">Minimum <span class="tag tag-rr">1:2 RR</span> — or opposing liquidity / HTF discount zone.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end .checklist-panels -->
+
+    <!-- Trade Ready Banner -->
+    <div class="trade-ready" id="trade-ready">
+      <span class="ready-icon">✓</span>
+      <span>All checks passed — trade is valid.</span>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>Trade Checklist &nbsp;·&nbsp; Personal Use Only</span>
+      <span>Not financial advice</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
